@@ -1834,18 +1834,16 @@ int matrix_mul(int N) {
         result[i] = (int*)malloc(N * sizeof(int));
 
 
-
     for (i=0; i<N; i++) {
         for (j=0; j<N; j++){
-            mat[i][j] = 1;
-
+            mat[i][j] = 100;
         }
     }
 
     for (i=0; i<N; i++) {
         for (j=0; j<N; j++) {
             for (k=0; k<N; k++) {
-                result[i][j] = mat[i][k] * mat[k][j];
+                result[i][j] += mat[i][k] * mat[k][j];
             }
         }
     }

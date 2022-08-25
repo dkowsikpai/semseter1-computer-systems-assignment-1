@@ -109,9 +109,9 @@ matrix_mul:
 	movl	$16, %eax
 	subq	$1, %rax
 	addq	%rdx, %rax
-	movl	$16, %ecx
+	movl	$16, %edi
 	movl	$0, %edx
-	divq	%rcx
+	divq	%rdi
 	imulq	$16, %rax, %rax
 	movq	%rax, %rdx
 	andq	$-4096, %rdx
@@ -174,7 +174,7 @@ matrix_mul:
 	movslq	%edx, %rdx
 	salq	$2, %rdx
 	addq	%rdx, %rax
-	movl	$1, (%rax)
+	movl	$100, (%rax)
 	addl	$1, -80(%rbp)
 .L13:
 	movl	-80(%rbp), %eax
@@ -194,24 +194,6 @@ matrix_mul:
 	movl	$0, -84(%rbp)
 	jmp	.L18
 .L19:
-	movq	-64(%rbp), %rax
-	movl	-76(%rbp), %edx
-	movslq	%edx, %rdx
-	movq	(%rax,%rdx,8), %rax
-	movl	-84(%rbp), %edx
-	movslq	%edx, %rdx
-	salq	$2, %rdx
-	addq	%rdx, %rax
-	movl	(%rax), %esi
-	movq	-64(%rbp), %rax
-	movl	-84(%rbp), %edx
-	movslq	%edx, %rdx
-	movq	(%rax,%rdx,8), %rax
-	movl	-80(%rbp), %edx
-	movslq	%edx, %rdx
-	salq	$2, %rdx
-	addq	%rdx, %rax
-	movl	(%rax), %ecx
 	movq	-48(%rbp), %rax
 	movl	-76(%rbp), %edx
 	movslq	%edx, %rdx
@@ -219,10 +201,37 @@ matrix_mul:
 	movl	-80(%rbp), %edx
 	movslq	%edx, %rdx
 	salq	$2, %rdx
-	addq	%rax, %rdx
-	movl	%esi, %eax
-	imull	%ecx, %eax
-	movl	%eax, (%rdx)
+	addq	%rdx, %rax
+	movl	(%rax), %esi
+	movq	-64(%rbp), %rax
+	movl	-76(%rbp), %edx
+	movslq	%edx, %rdx
+	movq	(%rax,%rdx,8), %rax
+	movl	-84(%rbp), %edx
+	movslq	%edx, %rdx
+	salq	$2, %rdx
+	addq	%rdx, %rax
+	movl	(%rax), %ecx
+	movq	-64(%rbp), %rax
+	movl	-84(%rbp), %edx
+	movslq	%edx, %rdx
+	movq	(%rax,%rdx,8), %rax
+	movl	-80(%rbp), %edx
+	movslq	%edx, %rdx
+	salq	$2, %rdx
+	addq	%rdx, %rax
+	movl	(%rax), %eax
+	imull	%eax, %ecx
+	movq	-48(%rbp), %rax
+	movl	-76(%rbp), %edx
+	movslq	%edx, %rdx
+	movq	(%rax,%rdx,8), %rax
+	movl	-80(%rbp), %edx
+	movslq	%edx, %rdx
+	salq	$2, %rdx
+	addq	%rdx, %rax
+	leal	(%rsi,%rcx), %edx
+	movl	%edx, (%rax)
 	addl	$1, -84(%rbp)
 .L18:
 	movl	-84(%rbp), %eax
