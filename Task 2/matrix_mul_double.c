@@ -21,7 +21,7 @@ double diff_timespec(const struct timespec *time_a, const struct timespec *time_
 }
 
 double matrix_mul(int N) {
-
+    // Function to multipy 2 matrix and compute run time
     // Defining time variables
     struct timespec start_time, end_time;
     
